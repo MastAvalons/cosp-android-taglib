@@ -30,6 +30,8 @@ case $ABI in
     ;;
 esac
 
+LDFLAGS="$LDFLAGS -lgnustl_shared -lcrystax_shared"
+
 export CFLAGS CXXFLAGS LDFLAGS
 
 cmake \
