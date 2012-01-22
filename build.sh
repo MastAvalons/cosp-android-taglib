@@ -14,7 +14,7 @@ cd $OUTDIR || exit 1
 
 CFLAGS="-O3 -fno-short-enums -fno-strict-aliasing"
 CFLAGS="$CFLAGS -Wno-psabi -Wno-cast-qual -Wno-deprecated-declarations"
-CXXFLAGS="-fexceptions -frtti"
+CXXFLAGS="-fexceptions -frtti -D__STDC_INT64__"
 
 LDFLAGS=""
 
