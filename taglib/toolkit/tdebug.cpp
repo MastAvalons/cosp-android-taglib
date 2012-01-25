@@ -27,6 +27,10 @@
 #include <iostream>
 #include <bitset>
 
+#ifdef __ANDROID__
+#include <android/log.h>
+#endif
+
 #include "tdebug.h"
 #include "tstring.h"
 
@@ -34,6 +38,9 @@ using namespace TagLib;
 
 void TagLib::debug(const String &s)
 {
+#ifdef __ANDROID__
+  __android_log_print(ANDROID_LOG_DEBUG, "TAGLIB", "%s", s.toCString());
+#endif
   std::cerr << "TagLib: " << s << std::endl;
 }
 
@@ -41,13 +48,21 @@ void TagLib::debugData(const ByteVector &v)
 {
   for(uint i = 0; i < v.size(); i++) {
 
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_DEBUG, "TAGLIB", "***[%u] - '%c' - int %d", i, char(v[i]), int(v[i]));
+#endif
     std::cout << "*** [" << i << "] - '" << char(v[i]) << "' - int " << int(v[i])
               << std::endl;
 
     std::bitset<8> b(v[i]);
 
     for(int j = 0; j < 8; j++)
+    {
+#ifdef __ANDROID__
+      __android_log_print(ANDROID_LOG_DEBUG, "TAGLIB", "%d:%d %d", i, j, (int)b.test(j));
+#endif
       std::cout << i << ":" << j << " " << b.test(j) << std::endl;
+    }
 
     std::cout << std::endl;
   }

@@ -112,7 +112,10 @@ File::FilePrivate::FilePrivate(FileName fileName) :
   if(file)
     readOnly = false;
   else
+  {
+    debug("Could not open file in RW mode, open as RO");
     file = fopen(name, "rb");
+  }
 
   if(!file)
     debug("Could not open file " + String((const char *) name));
